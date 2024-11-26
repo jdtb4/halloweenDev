@@ -31,6 +31,9 @@ const bestPath = findSafestPath(dream) // Devuelve 7
 
 // 1 -> 3 -> 1 -> 1 -> 1 = 7
 ```
+
+</details>
+
 ## Solución
 
 ```js
