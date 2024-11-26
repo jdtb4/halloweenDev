@@ -1,31 +1,28 @@
-const zombies = [2, 4, 2];
-const humans = [3, 3, 4];
+const dream = [
+  [1, 3, 1],
+  [1, 5, 1],
+  [4, 2, 1],
+];
 
-function battleHorde(zombies, humans) {
-  let zombiesPower = 0;
-  let humansPower = 0;
+function findSafestPath(dream) {
+  const rows = dream.length;
+  const cols = dream[0].length;
 
-  for (let i = 0; i < zombies.length; i++) {
-    const z = Number(zombies[i]);
-    const h = Number(humans[i]);
+  const dp = Array(cols).fill(0);
 
-    const difference = z + zombiesPower - (h + humansPower);
-    if (difference > 0) {
-      zombiesPower = difference;
-      humansPower = 0;
-    } else if (difference < 0) {
-      humansPower = -difference;
-      zombiesPower = 0;
-    } else {
-      zombiesPower = 0;
-      humansPower = 0;
+  dp[0] = dream[0][0];
+
+  for (let j = 1; j < cols; j++) {
+    dp[j] = dp[j - 1] + dream[0][j];
+  }
+
+  for (let i = 1; i < rows; i++) {
+    dp[0] += dream[i][0];
+    for (let j = 1; j < cols; j++) {
+      dp[j] = dream[i][j] + Math.min(dp[j], dp[j - 1]);
     }
   }
-  return zombiesPower > humansPower
-    ? `${zombiesPower}z`
-    : humansPower > zombiesPower
-    ? `${humansPower}h`
-    : "x";
+  return dp[cols - 1];
 }
 
-console.log(battleHorde(zombies, humans));
+console.log(findSafestPath(dream)); // 7

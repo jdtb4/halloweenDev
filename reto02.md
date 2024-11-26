@@ -53,9 +53,6 @@ const result = battleHorde(zombies, humans);  // -> "x"
 
 </details>
 
-<br/>
-<br/>
-
 ## Solución
 
 ```js
