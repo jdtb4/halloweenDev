@@ -51,6 +51,7 @@ function findSafestPath(dream) {
   return dp[cols - 1];
 }
 ```
-</details>
 
 > Caramelos: 🍬 340
+
+<br/>
