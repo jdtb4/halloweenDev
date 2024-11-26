@@ -3,7 +3,7 @@
 ![Hero Image](./assets/halloween.avif)
 
 ## 🍬 [Halloween.dev](https://www.halloween.dev/es) 🎃
-# Desafíos de programación para practicar la lógica ambientado en Halloween
+Desafíos de programación para practicar la lógica ambientado en Halloween
 
 <br/>
 

@@ -1,28 +1,31 @@
-const dream = [
-  [1, 3, 1],
-  [1, 5, 1],
-  [4, 2, 1],
+const whisper = "d~~~~~a";
+const suspects = [
+  "Dracula",
+  "Freddy Krueger",
+  "Jason Voorhees",
+  "Michael Myers",
 ];
 
-function findSafestPath(dream) {
-  const rows = dream.length;
-  const cols = dream[0].length;
+const whisper2 = "~r~dd~";
+const suspects2 = ["Freddy", "Freddier", "Fredderic"];
 
-  const dp = Array(cols).fill(0);
+const whisper4 = "mi~~def";
+const suspects4 = ["Midudev", "Midu", "Madeval"];
 
-  dp[0] = dream[0][0];
+function findTheKiller(whisper, suspects) {
+  let regexPattern =
+    "^" + whisper.replace(/~/g, ".") + (whisper.endsWith("$") ? "$" : "");
 
-  for (let j = 1; j < cols; j++) {
-    dp[j] = dp[j - 1] + dream[0][j];
-  }
+  const regex = new RegExp(regexPattern, "i");
+  const matches = suspects.filter((suspect) => regex.test(suspect));
 
-  for (let i = 1; i < rows; i++) {
-    dp[0] += dream[i][0];
-    for (let j = 1; j < cols; j++) {
-      dp[j] = dream[i][j] + Math.min(dp[j], dp[j - 1]);
-    }
-  }
-  return dp[cols - 1];
+  return matches.length === 1
+    ? matches[0]
+    : matches.length > 1
+    ? matches.join(",")
+    : "";
 }
 
-console.log(findSafestPath(dream)); // 7
+console.log(findTheKiller(whisper, suspects)); // Dracula
+console.log(findTheKiller(whisper2, suspects2)); // Freddy,Freddier
+console.log(findTheKiller(whisper4, suspects4)); // Midudev,Midu
