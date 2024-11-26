@@ -1,18 +1,31 @@
-const potions = [1, 2, 3, 4];
-const goal = 6;
+const zombies = [2, 4, 2];
+const humans = [3, 3, 4];
 
-function createMagicPotion(potions, target) {
-  const mapPower = new Map();
+function battleHorde(zombies, humans) {
+  let zombiesPower = 0;
+  let humansPower = 0;
 
-  for (const [index, potion] of potions.entries()) {
-    const neededPower = target - potion;
+  for (let i = 0; i < zombies.length; i++) {
+    const z = Number(zombies[i]);
+    const h = Number(humans[i]);
 
-    if (mapPower.has(neededPower)) {
-      return [mapPower.get(neededPower), index];
+    const difference = z + zombiesPower - (h + humansPower);
+    if (difference > 0) {
+      zombiesPower = difference;
+      humansPower = 0;
+    } else if (difference < 0) {
+      humansPower = -difference;
+      zombiesPower = 0;
+    } else {
+      zombiesPower = 0;
+      humansPower = 0;
     }
-
-    mapPower.set(potion, index);
   }
+  return zombiesPower > humansPower
+    ? `${zombiesPower}z`
+    : humansPower > zombiesPower
+    ? `${humansPower}h`
+    : "x";
 }
 
-console.log(createMagicPotion(potions, goal));
+console.log(battleHorde(zombies, humans));
